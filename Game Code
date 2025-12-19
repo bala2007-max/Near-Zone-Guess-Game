@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<windows.h>
+void color(int c)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),c);
+}
+int main()
+{
+    int secret,guess;
+    int attempt;
+    int maxAttempts=7;
+    srand(time(0));
+    secret=rand()%100+1;
+    color(11);
+    printf("====================================\n");
+    printf("      NEAR ZONE GUESS GAME\n");
+    printf("====================================\n\n");
+    color(7);
+    printf("Rules:\n");
+    printf("1. Guess the number between 1 and 100\n");
+    printf("2. You have only %d attempts\n",maxAttempts);
+    printf("3. Red text = You are within 5 numbers of the secret number\n\n");
+    for(attempt=1;attempt<=maxAttempts;attempt++)
+        {
+        printf("Attempt %d: Enter your guess: ",attempt);
+        scanf("%d", &guess);
+        if(guess==secret)
+            {
+            color(10);
+            printf("You guessed the number in %d attempts.\n",attempt);
+            printf("\nCONGRATULATIONS! ahh valthukal valthukal!!\n");
+            color(7);
+            return 0;
+        }
+        if(abs(guess-secret)<=5)
+        {
+            color(12);
+            printf("VERY CLOSE! You are within  5 of the secret number.\n");
+            color(7);
+        } else if(guess<secret)
+         {
+            printf("Too LOW\n");
+        } else
+        {
+            printf("Too HIGH\n");
+        }
+        printf("\n");
+    }
+    color(4);
+    printf("ATTEMPTS WASTED! You could not guess the number.\n");
+    printf("The correct number was: %d\n",secret);
+    color(7);
+    return 0;
+}
+
